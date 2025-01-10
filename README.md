@@ -9,6 +9,7 @@
 - **原子化 CSS：** [UnoCSS](https://unocss.dev/) - 即时的原子化 CSS 引擎
 - **组合式工具：** [VueUse](https://vueuse.org/) - Vue 组合式 API 工具集
 - **图标：** [@iconify-json/carbon](https://icon-sets.iconify.design/carbon/) - Carbon 设计图标集
+- **国际化：** [Nuxt i18n](https://i18n.nuxtjs.org/) - 多语言支持
 - **类型检查：** TypeScript - JavaScript 的超集
 
 ## 特性
@@ -17,6 +18,7 @@
 - 🎨 集成 Ant Design Vue 组件库，支持暗色主题
 - 🎯 UnoCSS 提供的原子化 CSS 能力
 - 🛠️ VueUse 提供的组合式 API 工具
+- 🌐 内置国际化支持，支持简体中文、繁体中文和英文
 - 🌙 内置暗色模式支持（带过渡动画）
 - 📦 自动导入组件和组合式函数
 - 🔍 完整的 TypeScript 支持
@@ -56,6 +58,10 @@ npm run preview
 │   └── css/          # 全局样式
 ├── components/        # 组件
 ├── composables/      # 组合式函数
+├── i18n/             # 国际化语言文件
+│   ├── en.json       # 英文翻译
+│   ├── zh-CN.json    # 简体中文翻译
+│   └── zh-TW.json    # 繁体中文翻译
 ├── pages/            # 页面
 ├── plugins/          # 插件
 ├── types/            # 类型定义
@@ -82,6 +88,10 @@ npm run preview
 ```html
 <div class="text-primary bg-primary-bg hover:bg-primary-bg-hover">内容</div>
 ```
+
+## 国际化
+
+项目支持多语言切换，默认语言为简体中文。用户可以通过语言切换组件选择繁体中文或英文。
 
 ## 贡献
 

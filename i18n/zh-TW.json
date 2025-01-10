@@ -1,0 +1,30 @@
+{
+  "welcome": "Nuxt3 + Ant Design Vue + VueUse + UnoCSS 示例",
+  "components": {
+    "antd": {
+      "title": "Ant Design Vue 元件示例",
+      "buttons": "按鈕元件：",
+      "form": "表單元件：",
+      "primaryBtn": "主要按鈕",
+      "defaultBtn": "預設按鈕",
+      "dashedBtn": "虛線按鈕",
+      "username": "用戶名",
+      "password": "密碼",
+      "submit": "提交",
+      "usernamePlaceholder": "請輸入用戶名",
+      "passwordPlaceholder": "請輸入密碼"
+    },
+    "vueuse": {
+      "title": "VueUse 功能示例",
+      "toggle": "切換顯示/隱藏",
+      "content": "這是一段通過 useToggle 控制顯示的內容"
+    },
+    "unocss": {
+      "title": "UnoCSS 樣式示例"
+    }
+  },
+  "messages": {
+    "success": "這是一條成功消息",
+    "submitData": "提交的數據：{data}"
+  }
+}

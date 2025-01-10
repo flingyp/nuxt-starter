@@ -1,10 +1,11 @@
 <script setup lang="ts">
 const { $message } = useNuxtApp();
+const { t } = useI18n();
 
 const [isShow, toggle] = useToggle(false);
 
 const showMessage = () => {
-  $message.success("这是一条成功消息");
+  $message.success(t("messages.success"));
 };
 
 const formState = ref({
@@ -13,7 +14,7 @@ const formState = ref({
 });
 
 const handleSubmit = () => {
-  $message.info(`提交的数据：${JSON.stringify(formState.value)}`);
+  $message.info(t("messages.submitData", { data: JSON.stringify(formState.value) }));
 };
 </script>
 
@@ -24,16 +25,19 @@ const handleSubmit = () => {
     <!-- 页面标题 -->
     <div class="max-w-7xl mx-auto mb-8 flex justify-between items-center">
       <h1 class="text-2xl font-bold text-gray-900 dark:text-gray-50">
-        Nuxt3 + Ant Design Vue + VueUse + UnoCSS 示例
+        {{ t("welcome") }}
       </h1>
-      <ThemeSwitch />
+      <div class="flex items-center gap-4">
+        <LangSwitch />
+        <ThemeSwitch />
+      </div>
     </div>
 
     <!-- 卡片网格布局 -->
     <div class="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-6">
       <!-- Ant Design Vue 示例 -->
       <a-card
-        title="Ant Design Vue 组件示例"
+        :title="t('components.antd.title')"
         class="col-span-1 md:col-span-2 shadow-md hover:shadow-lg transition-shadow duration-300 dark:bg-[#1f1f1f]"
       >
         <div class="space-y-6">
@@ -42,12 +46,12 @@ const handleSubmit = () => {
             <h3
               class="text-lg font-medium mb-3 text-gray-700 dark:text-gray-300"
             >
-              按钮组件：
+              {{ t("components.antd.buttons") }}
             </h3>
             <a-space>
-              <a-button type="primary" @click="showMessage">主要按钮</a-button>
-              <a-button>默认按钮</a-button>
-              <a-button type="dashed">虚线按钮</a-button>
+              <a-button type="primary" @click="showMessage">{{ t("components.antd.primaryBtn") }}</a-button>
+              <a-button>{{ t("components.antd.defaultBtn") }}</a-button>
+              <a-button type="dashed">{{ t("components.antd.dashedBtn") }}</a-button>
             </a-space>
           </div>
 
@@ -56,23 +60,23 @@ const handleSubmit = () => {
             <h3
               class="text-lg font-medium mb-3 text-gray-700 dark:text-gray-300"
             >
-              表单组件：
+              {{ t("components.antd.form") }}
             </h3>
             <a-form :model="formState" @finish="handleSubmit" class="max-w-lg">
-              <a-form-item label="用户名">
+              <a-form-item :label="t('components.antd.username')">
                 <a-input
                   v-model:value="formState.username"
-                  placeholder="请输入用户名"
+                  :placeholder="t('components.antd.usernamePlaceholder')"
                 />
               </a-form-item>
-              <a-form-item label="密码">
+              <a-form-item :label="t('components.antd.password')">
                 <a-input-password
                   v-model:value="formState.password"
-                  placeholder="请输入密码"
+                  :placeholder="t('components.antd.passwordPlaceholder')"
                 />
               </a-form-item>
               <a-form-item>
-                <a-button type="primary" html-type="submit">提交</a-button>
+                <a-button type="primary" html-type="submit">{{ t("components.antd.submit") }}</a-button>
               </a-form-item>
             </a-form>
           </div>
@@ -81,23 +85,23 @@ const handleSubmit = () => {
 
       <!-- VueUse 示例 -->
       <a-card
-        title="VueUse 功能示例"
+        :title="t('components.vueuse.title')"
         class="shadow-md hover:shadow-lg transition-shadow duration-300 dark:bg-[#1f1f1f]"
       >
         <div class="space-y-4">
-          <a-button @click="toggle(!isShow)">切换显示/隐藏</a-button>
+          <a-button @click="toggle(!isShow)">{{ t('components.vueuse.toggle') }}</a-button>
           <div
             v-if="isShow"
             class="p-4 rounded transition-colors duration-300 bg-gray-100 dark:bg-[#141414] text-gray-800 dark:text-gray-300"
           >
-            这是一段通过 useToggle 控制显示的内容
+            {{ t('components.vueuse.content') }}
           </div>
         </div>
       </a-card>
 
       <!-- UnoCSS 示例 -->
       <a-card
-        title="UnoCSS 样式示例"
+        :title="t('components.unocss.title')"
         class="shadow-md hover:shadow-lg transition-shadow duration-300 dark:bg-[#1f1f1f]"
       >
         <div class="grid grid-cols-3 gap-4">

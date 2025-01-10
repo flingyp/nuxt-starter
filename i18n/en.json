@@ -1,0 +1,30 @@
+{
+  "welcome": "Nuxt3 + Ant Design Vue + VueUse + UnoCSS Example",
+  "components": {
+    "antd": {
+      "title": "Ant Design Vue Components",
+      "buttons": "Buttons:",
+      "form": "Form:",
+      "primaryBtn": "Primary Button",
+      "defaultBtn": "Default Button",
+      "dashedBtn": "Dashed Button",
+      "username": "Username",
+      "password": "Password",
+      "submit": "Submit",
+      "usernamePlaceholder": "Please input username",
+      "passwordPlaceholder": "Please input password"
+    },
+    "vueuse": {
+      "title": "VueUse Features",
+      "toggle": "Toggle Show/Hide",
+      "content": "This content is controlled by useToggle"
+    },
+    "unocss": {
+      "title": "UnoCSS Styles"
+    }
+  },
+  "messages": {
+    "success": "This is a success message",
+    "submitData": "Submitted data: {data}"
+  }
+}

@@ -6,7 +6,12 @@ export default defineNuxtConfig({
   devtools: { enabled: true },
 
   // 添加模块
-  modules: ["@unocss/nuxt", "@ant-design-vue/nuxt", "@vueuse/nuxt"],
+  modules: [
+    "@unocss/nuxt",
+    "@ant-design-vue/nuxt",
+    "@vueuse/nuxt",
+    "@nuxtjs/i18n"
+  ],
 
   // 配置自动导入
   imports: {
@@ -29,4 +34,26 @@ export default defineNuxtConfig({
     strict: true,
     typeCheck: true,
   },
+
+  i18n: {
+    langDir: '',
+    defaultLocale: 'zh-CN',
+    locales: [
+      {
+        code: 'zh-CN',
+        name: '简体中文',
+        file: 'zh-CN.json'
+      },
+      {
+        code: 'zh-TW',
+        name: '繁體中文',
+        file: 'zh-TW.json'
+      },
+      {
+        code: 'en',
+        name: 'English',
+        file: 'en.json'
+      }
+    ],
+  }
 });
