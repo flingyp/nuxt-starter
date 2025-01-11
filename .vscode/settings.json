@@ -1,5 +1,10 @@
 {
+  "eslint.useFlatConfig": true,
+  "editor.defaultFormatter": "dbaeumer.vscode-eslint",
   "cSpell.words": ["nuxt", "flingyp", "@apply"],
   "typescript.tsdk": "node_modules/typescript/lib",
-  "i18n-ally.localesPaths": ["i18n"]
+  "i18n-ally.localesPaths": [
+    "i18n"
+  ],
+  "i18n-ally.keystyle": "nested"
 }

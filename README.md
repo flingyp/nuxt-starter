@@ -11,6 +11,7 @@
 - **图标：** [@iconify-json/carbon](https://icon-sets.iconify.design/carbon/) - Carbon 设计图标集
 - **国际化：** [Nuxt i18n](https://i18n.nuxtjs.org/) - 多语言支持
 - **类型检查：** TypeScript - JavaScript 的超集
+- **代码质量：** [ESLint](https://eslint.org/) - JavaScript 和 Vue 代码的静态检查工具
 
 ## 特性
 
@@ -22,6 +23,7 @@
 - 🌙 内置暗色模式支持（带过渡动画）
 - 📦 自动导入组件和组合式函数
 - 🔍 完整的 TypeScript 支持
+- 🛡️ 集成 ESLint，确保代码质量和一致性
 
 ## 快速开始
 
@@ -51,6 +53,20 @@ npm run build
 npm run preview
 ```
 
+### 代码检查
+
+运行 ESLint 检查代码风格：
+
+```bash
+npm run lint
+```
+
+自动修复问题：
+
+```bash
+npm run lint:fix
+```
+
 ## 项目结构
 
 ```
@@ -67,7 +83,8 @@ npm run preview
 ├── types/            # 类型定义
 ├── app.vue           # 应用入口
 ├── nuxt.config.ts    # Nuxt 配置
-└── uno.config.ts     # UnoCSS 配置
+├── uno.config.ts     # UnoCSS 配置
+└── eslint.config.mjs  # ESLint 配置
 ```
 
 ## 自定义主题

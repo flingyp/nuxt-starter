@@ -1,23 +1,23 @@
 <script setup lang="ts">
-const { $message } = useNuxtApp();
-const { t } = useI18n();
+const { $message } = useNuxtApp()
+const { t } = useI18n()
 
-const [isShow, toggle] = useToggle(false);
+const [isShow, toggle] = useToggle(false)
 
 const showMessage = () => {
-  $message.success(t("messages.success"));
-};
+  $message.success(t('messages.success'))
+}
 
 const formState = ref({
-  username: "",
-  password: "",
-});
+  username: '',
+  password: '',
+})
 
 const handleSubmit = () => {
   $message.info(
-    t("messages.submitData", { data: JSON.stringify(formState.value) })
-  );
-};
+    t('messages.submitData', { data: JSON.stringify(formState.value) }),
+  )
+}
 </script>
 
 <template>
@@ -51,7 +51,10 @@ const handleSubmit = () => {
               {{ $t("components.antd.buttons") }}
             </h3>
             <a-space>
-              <a-button type="primary" @click="showMessage">
+              <a-button
+                type="primary"
+                @click="showMessage"
+              >
                 {{ $t("components.antd.primaryBtn") }}
               </a-button>
               <a-button>{{ $t("components.antd.defaultBtn") }}</a-button>
@@ -68,7 +71,11 @@ const handleSubmit = () => {
             >
               {{ $t("components.antd.form") }}
             </h3>
-            <a-form :model="formState" @finish="handleSubmit" class="max-w-lg">
+            <a-form
+              :model="formState"
+              class="max-w-lg"
+              @finish="handleSubmit"
+            >
               <a-form-item :label="$t('components.antd.username')">
                 <a-input
                   v-model:value="formState.username"
@@ -82,7 +89,10 @@ const handleSubmit = () => {
                 />
               </a-form-item>
               <a-form-item>
-                <a-button type="primary" html-type="submit">
+                <a-button
+                  type="primary"
+                  html-type="submit"
+                >
                   {{ $t("components.antd.submit") }}
                 </a-button>
               </a-form-item>

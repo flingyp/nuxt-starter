@@ -2,14 +2,21 @@
 const { locale, locales, setLocaleCookie } = useI18n()
 
 const switchLocale = () => {
-  setLocaleCookie(locale.value);
-};
+  setLocaleCookie(locale.value)
+}
 </script>
 
 <template>
   <div class="lang-switch">
-    <a-select v-model:value="locale" @change="switchLocale">
-      <a-select-option v-for="loc in locales" :key="loc.code" :value="loc.code">
+    <a-select
+      v-model:value="locale"
+      @change="switchLocale"
+    >
+      <a-select-option
+        v-for="loc in locales"
+        :key="loc.code"
+        :value="loc.code"
+      >
         <span v-if="loc.code === 'zh-CN'">🇨🇳</span>
         <span v-if="loc.code === 'zh-TW'">🇨🇳</span>
         <span v-if="loc.code === 'en'">🇬🇧</span>

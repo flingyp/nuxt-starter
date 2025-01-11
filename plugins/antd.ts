@@ -9,8 +9,8 @@ import {
   Layout,
   ConfigProvider,
   Space,
-} from "ant-design-vue";
-import type { App } from "vue";
+} from 'ant-design-vue'
+import type { App } from 'vue'
 
 // 需要注册的组件
 const components = [
@@ -23,19 +23,19 @@ const components = [
   Layout,
   ConfigProvider,
   Space,
-];
+]
 
 export default defineNuxtPlugin((nuxtApp) => {
   // 注册所有组件
-  const app: App = nuxtApp.vueApp;
+  const app: App = nuxtApp.vueApp
   components.forEach((component) => {
-    app.use(component);
-  });
+    app.use(component)
+  })
 
   // 注册全局方法
   return {
     provide: {
       message,
     },
-  };
-});
+  }
+})

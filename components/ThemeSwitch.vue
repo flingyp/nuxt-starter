@@ -1,50 +1,44 @@
 <script setup lang="ts">
-import { watch, computed } from "vue";
-import { useDark, useToggle, usePreferredDark } from "@vueuse/core";
-import { theme } from "ant-design-vue";
-
-// 检测系统主题模式
-const systemDark = usePreferredDark();
+// 监听系统主题变化
+const systemDark = usePreferredDark()
+watch(systemDark, (newValue) => {
+  isDark.value = newValue
+})
 
 // 使用 useDark 时设置初始值为系统主题模式
 const isDark = useDark({
-  selector: "html",
-  attribute: "data-theme",
-  valueDark: "dark",
-  valueLight: "light",
-});
+  selector: 'html',
+  attribute: 'data-theme',
+  valueDark: 'dark',
+  valueLight: 'light',
+})
 
-const toggleDark = useToggle(isDark);
-
-// 计算当前主题算法
-const themeAlgorithm = computed(() =>
-  isDark.value ? theme.darkAlgorithm : theme.defaultAlgorithm
-);
+const toggleDark = useToggle(isDark)
 
 // 切换主题的动画效果
 const toggleTheme = (event: MouseEvent) => {
-  const x = event.clientX;
-  const y = event.clientY;
+  const x = event.clientX
+  const y = event.clientY
   const endRadius = Math.hypot(
     Math.max(x, innerWidth - x),
-    Math.max(y, innerHeight - y)
-  );
+    Math.max(y, innerHeight - y),
+  )
 
   // 兼容性处理
   if (!document.startViewTransition) {
-    toggleDark();
-    return;
+    toggleDark()
+    return
   }
 
   const transition = document.startViewTransition(() => {
-    toggleDark();
-  });
+    toggleDark()
+  })
 
   transition.ready.then(() => {
     const clipPath = [
       `circle(0px at ${x}px ${y}px)`,
       `circle(${endRadius}px at ${x}px ${y}px)`,
-    ];
+    ]
 
     document.documentElement.animate(
       {
@@ -52,19 +46,14 @@ const toggleTheme = (event: MouseEvent) => {
       },
       {
         duration: 400,
-        easing: "ease-in",
+        easing: 'ease-in',
         pseudoElement: isDark.value
-          ? "::view-transition-old(root)"
-          : "::view-transition-new(root)",
-      }
-    );
-  });
-};
-
-// 监听系统主题变化
-watch(systemDark, (newValue) => {
-  isDark.value = newValue;
-});
+          ? '::view-transition-old(root)'
+          : '::view-transition-new(root)',
+      },
+    )
+  })
+}
 </script>
 
 <template>
