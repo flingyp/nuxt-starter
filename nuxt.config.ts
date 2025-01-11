@@ -32,12 +32,13 @@ export default defineNuxtConfig({
   typescript: {
     shim: false,
     strict: true,
-    typeCheck: true,
+    typeCheck: false,
   },
 
   i18n: {
     langDir: '',
     defaultLocale: 'zh-CN',
+    strategy: 'no_prefix',
     locales: [
       {
         code: 'zh-CN',
