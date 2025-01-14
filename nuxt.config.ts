@@ -37,25 +37,24 @@ export default defineNuxtConfig({
     },
   },
 
+  // I18n 配置
   i18n: {
     langDir: '',
     defaultLocale: 'zh-CN',
     strategy: 'no_prefix',
+    vueI18n: './i18n.config.ts',
     locales: [
       {
         code: 'zh-CN',
         name: '简体中文',
-        file: 'zh-CN.json',
       },
       {
         code: 'zh-TW',
         name: '繁體中文',
-        file: 'zh-TW.json',
       },
       {
         code: 'en',
         name: 'English',
-        file: 'en.json',
       },
     ],
   },
