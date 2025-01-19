@@ -4,9 +4,10 @@ export default withNuxt(
   {
     ignores: ['env.d.ts'],
   },
-  // {
-  //   files: ['**/*.ts', '**/*.tsx', '**/*.vue'],
-  //   rules: {
-  //   },
-  // },
+  {
+    files: ['**/*.ts', '**/*.tsx', '**/*.vue'],
+    rules: {
+      '@typescript-eslint/no-explicit-any': 'off',
+    },
+  },
 )

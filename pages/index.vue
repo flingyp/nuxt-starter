@@ -35,9 +35,9 @@ const handleSubmit = () => {
       </div>
     </div>
 
-    <!-- 卡片网格布局 -->
-    <div class="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-6">
-      <!-- Ant Design Vue 示例 -->
+    <!-- API 示例卡片 -->
+    <div class="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
+      <!-- 卡片网格布局 -->
       <a-card
         :title="$t('components.antd.title')"
         class="col-span-1 md:col-span-2 shadow-md hover:shadow-lg transition-shadow duration-300 dark:bg-[#1f1f1f]"

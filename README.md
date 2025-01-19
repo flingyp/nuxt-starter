@@ -110,6 +110,132 @@ npm run lint:fix
 
 项目支持多语言切换，默认语言为简体中文。用户可以通过语言切换组件选择繁体中文或英文。
 
+## API 层使用
+
+项目集成了统一的 API 请求层，基于 Nuxt 的 `useFetch` 封装，提供了以下功能：
+
+- 统一的请求配置和错误处理
+- 完整的 TypeScript 类型支持
+- 自动处理请求/响应拦截
+- 支持环境变量配置
+- 与 Nuxt 的数据获取最佳实践集成
+
+### 基础用法
+
+1. 定义 API 类型 (types/api.d.ts):
+
+```typescript
+// 基础响应类型
+interface ApiResponse<T = any> {
+  code: number
+  message: string
+  data: T
+}
+
+// 业务数据类型
+interface UserInfo {
+  id: number
+  username: string
+  email: string
+}
+```
+
+2. 创建 API 模块 (api/user.ts):
+
+```typescript
+export const useUserApi = () => {
+  // 获取用户信息
+  const getUserInfo = () => {
+    return useRequest<UserInfo>('/user/info')
+  }
+
+  // 获取用户列表
+  const getUserList = (params: PaginationParams) => {
+    return useRequest<UserInfo[]>('/user/list', {
+      params,
+    })
+  }
+
+  return {
+    getUserInfo,
+    getUserList,
+  }
+}
+```
+
+3. 在组件中使用:
+
+```vue
+<script setup lang="ts">
+const { getUserInfo, getUserList } = useUserApi()
+
+// 使用 useAsyncData 包装 API 调用
+const { data: userInfo, pending: loading } = await useAsyncData('userInfo', () => 
+  getUserInfo()
+)
+
+// 获取列表数据
+const { data: users } = await useAsyncData('users', () => 
+  getUserList({ page: 1, pageSize: 10 })
+)
+</script>
+```
+
+### 环境配置
+
+在 `.env` 文件中配置 API 基础路径：
+
+```env
+NUXT_PUBLIC_API_BASE=http://api.example.com
+```
+
+### 错误处理
+
+API 层统一处理了常见的错误情况：
+
+- 401: 未登录或登录过期
+- 403: 权限不足
+- 404: 资源不存在
+- 500: 服务器错误
+
+所有的错误都会通过 Ant Design Vue 的 Message 组件展示给用户。
+
+### 类型支持
+
+所有的 API 请求都有完整的 TypeScript 类型支持：
+
+- 请求参数类型检查
+- 响应数据类型提示
+- 错误处理类型支持
+
+### 注意事项
+
+1. 在组件中使用 API 时，建议使用 `useAsyncData` 包装请求：
+   - 提供更好的数据缓存和复用
+   - 自动处理服务端渲染
+   - 提供加载状态管理
+
+2. 为每个 `useAsyncData` 调用提供唯一的 key：
+
+```typescript
+// 好的做法
+const { data } = await useAsyncData('uniqueKey', () => getUserInfo())
+
+// 避免使用动态 key
+const { data } = await useAsyncData(`user-${id}`, () => getUserInfo(id))
+```
+
+3. 处理错误情况：
+
+```typescript
+const { data, error } = await useAsyncData('users', () => getUserList())
+if (error.value) {
+  // 处理错误
+  console.error('Failed to fetch users:', error.value)
+  return
+}
+```
+
 ## 贡献
 
 欢迎提交 Issue 和 Pull Request。

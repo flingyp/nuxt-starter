@@ -2,7 +2,6 @@ import { defineNuxtConfig } from 'nuxt/config'
 
 // https://nuxt.com/docs/api/configuration/nuxt-config
 export default defineNuxtConfig({
-
   // 添加模块
   modules: [
     '@unocss/nuxt',
@@ -16,11 +15,22 @@ export default defineNuxtConfig({
   imports: {
     // 启用自动导入
     autoImport: true,
+    // 将被自动导入的自定义目录数组。请注意，此选项不会覆盖默认目录（~/composables，~/utils）
+    dirs: ['api'],
   },
   devtools: { enabled: true },
 
   // 添加全局 CSS
   css: ['@unocss/reset/tailwind.css', '~/assets/css/theme.css'],
+
+  runtimeConfig: {
+    // 私有配置（仅在服务端可用）
+    apiSecret: '',
+    // 公共配置（客户端可用）
+    public: {
+      apiBase: process.env.NUXT_PUBLIC_API_BASE || '/api',
+    },
+  },
   compatibilityDate: '2024-11-01',
 
   // TypeScript 配置
