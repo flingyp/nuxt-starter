@@ -87,6 +87,19 @@ npm run lint:fix
 └── eslint.config.mjs  # ESLint 配置
 ```
 
+## 环境变量
+
+- 开发环境：`.env.development`
+- 生产环境：`.env.production`
+
+### 获取环境变量
+
+```typescript
+// 通过 useRuntimeConfig 获取环境变量配置
+const config = useRuntimeConfig()
+console.log('config', config)
+```
+
 ## 自定义主题
 
 项目集成了 Ant Design Vue 的主题定制功能，可以通过以下方式使用：
@@ -183,11 +196,7 @@ const { data: users } = await useAsyncData('users', () =>
 
 ### 环境配置
 
-在 `.env` 文件中配置 API 基础路径：
-
-```env
-NUXT_PUBLIC_API_BASE=http://api.example.com
-```
+在不同环境下的 `.env` 文件中配置 API 基础路径 `NUXT_PUBLIC_API_BASE`
 
 ### 错误处理
 
