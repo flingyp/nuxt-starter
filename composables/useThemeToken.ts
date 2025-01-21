@@ -6,7 +6,7 @@ export const useThemeToken = () => {
   const { useToken } = theme
   const { token } = useToken()
 
-  // 将主题 token 转换为 CSS 变量
+  // 将 Ant Design主题 token 转换为 CSS 变量
   const updateThemeVars = (tokens: GlobalToken) => {
     if (!import.meta.client) return // 确保只在客户端执行
 

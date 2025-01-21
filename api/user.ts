@@ -1,14 +1,18 @@
 import type { PaginationParams } from '~/types/api'
 
-interface UserInfo {
+export interface UserInfo {
   id: number
   username: string
   email: string
 }
 
-interface LoginParams {
+export interface LoginParams {
   username: string
   password: string
+}
+
+export interface LoginResponse {
+  token: string
 }
 
 export const useUserApi = () => {
@@ -19,7 +23,7 @@ export const useUserApi = () => {
 
   // 用户登录
   const login = (data: LoginParams) => {
-    return useRequest<{ token: string }>('/user/login', {
+    return useRequest<LoginResponse>('/user/login', {
       method: 'POST',
       body: data,
     })
