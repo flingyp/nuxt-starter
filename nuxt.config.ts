@@ -9,6 +9,7 @@ export default defineNuxtConfig({
     '@vueuse/nuxt',
     '@nuxtjs/i18n',
     '@nuxt/eslint',
+    'dayjs-nuxt',
   ],
 
   // 配置自动导入
@@ -23,6 +24,7 @@ export default defineNuxtConfig({
   // 添加全局 CSS
   css: ['@unocss/reset/tailwind.css', '~/assets/css/theme.css'],
 
+  // 运行时配置
   runtimeConfig: {
     // 私有配置（仅在服务端可用）
     apiSecret: '',
@@ -31,13 +33,19 @@ export default defineNuxtConfig({
       apiBase: process.env.NUXT_PUBLIC_API_BASE || '/api',
     },
   },
-  compatibilityDate: '2024-11-01',
 
   // TypeScript 配置
   typescript: {
     shim: true,
     strict: true,
     typeCheck: false,
+  },
+
+  // dayjs 配置
+  dayjs: {
+    locales: ['zh-cn', 'zh-tw', 'en'],
+    plugins: ['relativeTime', 'utc', 'timezone'],
+    defaultLocale: 'zh-cn',
   },
 
   // ESLint 配置

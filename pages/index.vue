@@ -1,6 +1,7 @@
 <script setup lang="ts">
 const { $message } = useNuxtApp()
 const { t } = useI18n()
+const { $dayjs } = useNuxtApp()
 
 const [isShow, toggle] = useToggle(false)
 
@@ -139,6 +140,29 @@ const handleSubmit = () => {
             class="aspect-square bg-purple-500 dark:bg-purple-700 rounded-lg shadow-lg flex items-center justify-center text-white transition-all duration-300 hover:scale-105 transform hover:shadow-xl"
           >
             Box 3
+          </div>
+        </div>
+      </a-card>
+
+      <!-- Dayjs 示例 -->
+      <a-card
+        :title="$t('components.dayjs.title')"
+        class="shadow-md hover:shadow-lg transition-shadow duration-300 dark:bg-[#1f1f1f]"
+      >
+        <div class="space-y-4">
+          <div class="flex flex-col gap-2">
+            <div class="text-gray-700 dark:text-gray-300">
+              {{ $t('components.dayjs.currentTime') }}:
+              {{ $dayjs().format('YYYY-MM-DD HH:mm:ss') }}
+            </div>
+            <div class="text-gray-700 dark:text-gray-300">
+              {{ $t('components.dayjs.relativeTime') }}:
+              {{ $dayjs().subtract(1, 'day').fromNow() }}
+            </div>
+            <div class="text-gray-700 dark:text-gray-300">
+              {{ $t('components.dayjs.utc') }}:
+              {{ $dayjs().utc().format() }}
+            </div>
           </div>
         </div>
       </a-card>

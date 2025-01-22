@@ -21,6 +21,12 @@
     },
     "unocss": {
       "title": "UnoCSS 樣式示例"
+    },
+    "dayjs": {
+      "title": "Dayjs 日期示例",
+      "currentTime": "當前時間",
+      "relativeTime": "相對時間",
+      "utc": "UTC 時間"
     }
   },
   "messages": {

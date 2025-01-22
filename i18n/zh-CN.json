@@ -1,30 +1,36 @@
 {
-  "welcome": "Nuxt3 + Ant Design Vue + VueUse + UnoCSS 示例",
+  "welcome": "欢迎使用 Nuxt 3 起始模板",
   "components": {
     "antd": {
       "title": "Ant Design Vue 组件示例",
-      "buttons": "按钮组件：",
-      "form": "表单组件：",
+      "buttons": "按钮",
       "primaryBtn": "主要按钮",
       "defaultBtn": "默认按钮",
       "dashedBtn": "虚线按钮",
+      "form": "表单",
       "username": "用户名",
-      "password": "密码",
-      "submit": "提交",
       "usernamePlaceholder": "请输入用户名",
-      "passwordPlaceholder": "请输入密码"
+      "password": "密码",
+      "passwordPlaceholder": "请输入密码",
+      "submit": "提交"
     },
     "vueuse": {
-      "title": "VueUse 功能示例",
-      "toggle": "切换显示/隐藏",
-      "content": "这是一段通过 useToggle 控制显示的内容"
+      "title": "VueUse 示例",
+      "toggle": "切换显示",
+      "content": "这是一个使用 VueUse 的 useToggle 函数控制显示/隐藏的内容。"
     },
     "unocss": {
-      "title": "UnoCSS 样式示例"
+      "title": "UnoCSS 示例"
+    },
+    "dayjs": {
+      "title": "Dayjs 日期示例",
+      "currentTime": "当前时间",
+      "relativeTime": "相对时间",
+      "utc": "UTC 时间"
     }
   },
   "messages": {
-    "success": "这是一条成功消息",
+    "success": "操作成功！",
     "submitData": "提交的数据：{data}"
   }
 }

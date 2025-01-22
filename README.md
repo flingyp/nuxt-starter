@@ -10,6 +10,7 @@
 - **组合式工具：** [VueUse](https://vueuse.org/) - Vue 组合式 API 工具集
 - **图标：** [@iconify-json/carbon](https://icon-sets.iconify.design/carbon/) - Carbon 设计图标集
 - **国际化：** [Nuxt i18n](https://i18n.nuxtjs.org/) - 多语言支持
+- **日期处理：** [Day.js](https://day.js.org/) - 轻量的日期处理库
 - **类型检查：** TypeScript - JavaScript 的超集
 - **代码质量：** [ESLint](https://eslint.org/) - JavaScript 和 Vue 代码的静态检查工具
 
@@ -21,6 +22,7 @@
 - 🛠️ VueUse 提供的组合式 API 工具
 - 🌐 内置国际化支持，支持简体中文、繁体中文和英文
 - 🌙 内置暗色模式支持（带过渡动画）
+- 📅 集成 Day.js 日期处理，支持多语言
 - 📦 自动导入组件和组合式函数
 - 🔍 完整的 TypeScript 支持
 - 🛡️ 集成 ESLint，确保代码质量和一致性
@@ -38,13 +40,21 @@ npm install
 启动开发服务器 (`http://localhost:3000`):
 
 ```bash
+# 使用开发环境配置
 npm run dev
+
+# 使用生产环境配置
+npm run dev:prod
 ```
 
 ### 构建生产版本
 
 ```bash
+# 使用开发环境配置构建
 npm run build
+
+# 使用生产环境配置构建
+npm run generate:prod
 ```
 
 ### 本地预览生产版本
@@ -84,7 +94,7 @@ npm run lint:fix
 ├── app.vue           # 应用入口
 ├── nuxt.config.ts    # Nuxt 配置
 ├── uno.config.ts     # UnoCSS 配置
-└── eslint.config.mjs  # ESLint 配置
+└── eslint.config.mjs # ESLint 配置
 ```
 
 ## 环境变量
@@ -100,7 +110,9 @@ const config = useRuntimeConfig()
 console.log('config', config)
 ```
 
-## 自定义主题
+## 功能使用指南
+
+### 主题配置
 
 项目集成了 Ant Design Vue 的主题定制功能，可以通过以下方式使用：
 
@@ -119,11 +131,52 @@ console.log('config', config)
 <div class="text-primary bg-primary-bg hover:bg-primary-bg-hover">内容</div>
 ```
 
-## 国际化
+### 国际化使用
 
 项目支持多语言切换，默认语言为简体中文。用户可以通过语言切换组件选择繁体中文或英文。
 
-## API 层使用
+```vue
+<script setup>
+const { t, locale } = useI18n()
+
+// 切换语言
+const switchLanguage = (lang) => {
+  locale.value = lang
+}
+</script>
+
+<template>
+  <div>{{ t('welcome') }}</div>
+</template>
+```
+
+### Day.js 使用
+
+项目集成了 Day.js 日期处理库，支持多语言和常用插件：
+
+```vue
+<script setup>
+const { $dayjs } = useNuxtApp()
+const { locale } = useI18n()
+
+// 监听语言变化，更新 dayjs 语言
+watch(locale, (newLocale) => {
+  const dayjsLocale = newLocale.toLowerCase().replace('-', '-')
+  $dayjs.locale(dayjsLocale)
+})
+
+// 格式化日期
+const formattedDate = $dayjs().format('YYYY-MM-DD HH:mm:ss')
+
+// 相对时间
+const relativeTime = $dayjs().subtract(1, 'day').fromNow()
+
+// UTC 时间
+const utcTime = $dayjs().utc().format()
+</script>
+```
+
+### API 层使用
 
 项目集成了统一的 API 请求层，基于 Nuxt 的 `useFetch` 封装，提供了以下功能：
 
@@ -133,7 +186,7 @@ console.log('config', config)
 - 支持环境变量配置
 - 与 Nuxt 的数据获取最佳实践集成
 
-### 基础用法
+#### 基础用法
 
 1. 定义 API 类型 (types/api.d.ts):
 
@@ -192,57 +245,6 @@ const { data: users } = await useAsyncData('users', () =>
   getUserList({ page: 1, pageSize: 10 })
 )
 </script>
-```
-
-### 环境配置
-
-在不同环境下的 `.env` 文件中配置 API 基础路径 `NUXT_PUBLIC_API_BASE`
-
-### 错误处理
-
-API 层统一处理了常见的错误情况：
-
-- 401: 未登录或登录过期
-- 403: 权限不足
-- 404: 资源不存在
-- 500: 服务器错误
-
-所有的错误都会通过 Ant Design Vue 的 Message 组件展示给用户。
-
-### 类型支持
-
-所有的 API 请求都有完整的 TypeScript 类型支持：
-
-- 请求参数类型检查
-- 响应数据类型提示
-- 错误处理类型支持
-
-### 注意事项
-
-1. 在组件中使用 API 时，建议使用 `useAsyncData` 包装请求：
-   - 提供更好的数据缓存和复用
-   - 自动处理服务端渲染
-   - 提供加载状态管理
-
-2. 为每个 `useAsyncData` 调用提供唯一的 key：
-
-```typescript
-// 好的做法
-const { data } = await useAsyncData('uniqueKey', () => getUserInfo())
-
-// 避免使用动态 key
-const { data } = await useAsyncData(`user-${id}`, () => getUserInfo(id))
-```
-
-3. 处理错误情况：
-
-```typescript
-const { data, error } = await useAsyncData('users', () => getUserList())
-if (error.value) {
-  // 处理错误
-  console.error('Failed to fetch users:', error.value)
-  return
-}
 ```
 
 ## 贡献
